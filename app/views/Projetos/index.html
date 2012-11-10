@@ -1,0 +1,58 @@
+#{extends 'main.html' /}
+
+<script type="text/javascript">
+
+    $(function(){
+
+        #{button_fnc obj:'.btn_edit', icon:'ui-icon-pencil', text:false/}
+        #{button_fnc obj:'.btn_delete', icon:'ui-icon-trash', text:false/}
+        #{button_fnc obj:'#btn_novo', icon:'ui-icon-plus'/}	
+        #{confirm_fnc obj:'#dialog', width: '300'/}
+        #{grid_fnc/}
+
+
+    });
+    #{confirm_method /}
+	
+</script>
+
+#{box}
+#{button label:'Novo Projeto', id:'btn_novo', href:@Projetos.form()/}
+#{/box}
+
+#{confirm id:'dialog' , msg:'Deseja realmente apagar este registro?'/}
+
+#{grid titulo:'Lista de Projetos', rodape:'Foram encontrados um total de '+ projetos.size() +' projeto(s)'}
+<table class="ui-grid-content ui-widget-content">
+    <thead>	
+        <tr>
+            <th align="center" class="ui-state-default">&nbsp;</th>
+            <th align="left" class="ui-state-default">Nome</th>
+            <th align="left" class="ui-state-default">Descricao</th>
+            <th align="left" class="ui-state-default">Data Fim</th>
+            <th align="left" class="ui-state-default">Data Inicio</th>
+        </tr>
+    </thead>
+    <tbody>
+        #{list items:projetos, as:'p'}
+        <tr>
+            <td style="width:60px" class="ui-widget-content">
+				#{button label:'Editar', class:'btn_edit', href:@Projetos.form(p.id)/} 
+				#{button label:'Excluir', class:'btn_delete',confirm:'"#dialog"' ,href:@Projetos.delete(p.id) /}</td>		
+            <td style="text-align: left" class="ui-widget-content">
+		        <a href="@{Projetos.view(p.id)}">${p.nome }</a>
+            </td>
+            <td style="text-align: left" class="ui-widget-content">
+		        ${p.descricao }</a>
+            </td>
+            <td style="text-align: left" class="ui-widget-content">
+		        ${p.data_fim?.format('dd/MM/yyyy') }</a>
+            </td>
+            <td style="text-align: left" class="ui-widget-content">
+		        ${p.data_inicio?.format('dd/MM/yyyy') }</a>
+            </td>
+        </tr>
+        #{/list}
+    </tbody>
+</table>
+#{/grid}

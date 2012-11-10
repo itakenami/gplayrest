@@ -1,0 +1,46 @@
+#{extends 'main.html' /}
+
+<script type="text/javascript">
+
+    $(function(){
+
+        #{button_fnc obj:'.btn_edit', icon:'ui-icon-pencil', text:false/}
+        #{button_fnc obj:'.btn_delete', icon:'ui-icon-trash', text:false/}
+        #{button_fnc obj:'#btn_novo', icon:'ui-icon-plus'/}	
+        #{confirm_fnc obj:'#dialog', width: '300'/}
+        #{grid_fnc/}
+
+
+    });
+    #{confirm_method /}
+	
+</script>
+
+#{box}
+#{button label:'Novo Cargo', id:'btn_novo', href:@Cargos.form()/}
+#{/box}
+
+#{confirm id:'dialog' , msg:'Deseja realmente apagar este registro?'/}
+
+#{grid titulo:'Lista de Cargos', rodape:'Foram encontrados um total de '+ cargos.size() +' cargo(s)'}
+<table class="ui-grid-content ui-widget-content">
+    <thead>	
+        <tr>
+            <th align="center" class="ui-state-default">&nbsp;</th>
+            <th align="left" class="ui-state-default">Nome</th>
+        </tr>
+    </thead>
+    <tbody>
+        #{list items:cargos, as:'c'}
+        <tr>
+            <td style="width:60px" class="ui-widget-content">
+				#{button label:'Editar', class:'btn_edit', href:@Cargos.form(c.id)/} 
+				#{button label:'Excluir', class:'btn_delete',confirm:'"#dialog"' ,href:@Cargos.delete(c.id) /}</td>		
+            <td style="text-align: left" class="ui-widget-content">
+		        <a href="@{Cargos.view(c.id)}">${c.nome }</a>
+            </td>
+        </tr>
+        #{/list}
+    </tbody>
+</table>
+#{/grid}

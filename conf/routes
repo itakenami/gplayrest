@@ -1,0 +1,21 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                       Cargos.index
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# ROTAS CLIENT
+GET     /changetema/{tema}                      DefaultController.changeTema
+GET     /{controller}                           {controller}.index 
+GET     /{controller}/view/{id}                 {controller}.view 
+GET     /{controller}/form/{id}                 {controller}.form
+GET     /{controller}/form                      {controller}.form
+GET     /{controller}/delete/{id}               {controller}.delete 
+POST    /{controller}/save/{id}                 {controller}.save
+POST    /{controller}/save                      {controller}.save 
+
+GET     /public/                                staticDir:public

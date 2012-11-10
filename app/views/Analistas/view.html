@@ -1,0 +1,33 @@
+#{extends 'main.html' /}
+
+<script type="text/javascript">
+
+    $(function(){
+
+        #{tab_fnc tab:'tabs'/}
+        #{button_fnc obj:'#btn_novo', icon:'ui-icon-plus'/}
+        #{button_fnc obj:'#btn_voltar', icon:'ui-icon-arrowreturnthick-1-w'/}
+        #{button_fnc obj:'#btn_edit', icon:'ui-icon-pencil'/}
+        
+    });
+
+</script>
+#{box}
+#{button label:'Voltar', id:'btn_voltar', href:@Analistas.index()/}
+#{button label:'Editar', id:'btn_edit', href:@Analistas.form(analista.id)/}
+#{/box}
+
+#{tab name:'tabs', tabs:'tabs-1', labels:'Analistas'}
+
+
+<div id="tabs-1">
+    <label>Nome</label>
+    <div class="labelform">${analista.nome}&nbsp</div>
+    <label>Especialidade</label>
+    <div class="labelform">${analista.especialidade}&nbsp</div>
+
+    <label>Cargo</label>
+    <div class="labelform">${analista.cargo}&nbsp</div>
+
+</div>
+#{/tab}
